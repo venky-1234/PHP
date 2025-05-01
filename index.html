@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Signup & Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts & Font Awesome for icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* (Your CSS code here; unchanged) */
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+      width: 370px;
+      max-width: 95vw;
+      padding: 2.2rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      position: relative;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.7rem 0;
+      cursor: pointer;
+      font-weight: 700;
+      color: #764ba2;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab.active {
+      color: #667eea;
+      border-bottom: 2.5px solid #667eea;
+    }
+    form {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      animation: fadeIn 0.5s;
+    }
+    form.active {
+      display: flex;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .input-group input {
+      width: 80%;
+      padding: 1rem 1rem 1rem 2.5rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8fafc;
+      transition: border 0.2s;
+      outline: none;
+    }
+    .input-group input:focus {
+      border: 1.5px solid #667eea;
+      background: #fff;
+    }
+    .input-group label {
+      position: absolute;
+      left: 2.5rem;
+      top: 1.1rem;
+      color: #aaa;
+      font-size: 1rem;
+      pointer-events: none;
+      transition: all 0.2s;
+      background: transparent;
+    }
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label {
+      top: -0.7rem;
+      left: 2.2rem;
+      font-size: 0.85rem;
+      color: #667eea;
+      background: #fff;
+      padding: 0 0.2rem;
+    }
+    .input-group .fa {
+      position: absolute;
+      left: 0.9rem;
+      top: 1.1rem;
+      color: #764ba2;
+      font-size: 1.1rem;
+    }
+    .btn {
+      padding: 0.9rem 0;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(31,38,135,0.07);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+      box-shadow: 0 4px 16px rgba(31,38,135,0.13);
+    }
+    .form-message {
+      font-size: 0.97rem;
+      margin-top: -0.6rem;
+      margin-bottom: 0.3rem;
+      color: #e74c3c;
+      text-align: center;
+      min-height: 1.2em;
+      transition: color 0.2s;
+    }
+    @media (max-width: 500px) {
+      .auth-card { padding: 1.2rem 0.5rem; width: 98vw; }
+      .input-group input { padding-left: 2rem; }
+      .input-group label { left: 2rem; }
+      .input-group input:focus + label,
+      .input-group input:not(:placeholder-shown) + label { left: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="tabs">
+      <div class="tab active" id="signupTab">Sign Up</div>
+      <div class="tab" id="loginTab">Login</div>
+    </div>
+    <!-- Signup Form -->
+    <form id="signupForm" class="active" autocomplete="off">
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" name="first_name" id="signup_first" placeholder=" " required />
+        <label for="signup_first">First Name</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" name="last_name" id="signup_last" placeholder=" " required />
+        <label for="signup_last">Last Name</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" name="email" id="signup_email" placeholder=" " required />
+        <label for="signup_email">Email</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-phone"></i>
+        <input type="text" name="phone" id="signup_phone" placeholder=" " required />
+        <label for="signup_phone">Phone</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-user-circle"></i>
+        <input type="text" name="username" id="signup_username" placeholder=" " required />
+        <label for="signup_username">Username</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" id="signup_password" placeholder=" " required />
+        <label for="signup_password">Password</label>
+      </div>
+      <div class="form-message" id="signupMessage"></div>
+      <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <!-- Login Form -->
+    <form id="loginForm" autocomplete="off">
+      <div class="input-group">
+        <i class="fa fa-user-circle"></i>
+        <input type="text" name="username" id="login_username" placeholder=" " required />
+        <label for="login_username">Username</label>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" id="login_password" placeholder=" " required />
+        <label for="login_password">Password</label>
+      </div>
+      <div class="form-message" id="loginMessage"></div>
+      <button class="btn" type="submit">Login</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Tab switching
+    $('#signupTab').click(function() {
+      $(this).addClass('active');
+      $('#loginTab').removeClass('active');
+      $('#signupForm').addClass('active');
+      $('#loginForm').removeClass('active');
+    });
+    $('#loginTab').click(function() {
+      $(this).addClass('active');
+      $('#signupTab').removeClass('active');
+      $('#loginForm').addClass('active');
+      $('#signupForm').removeClass('active');
+    });
+
+    // Signup AJAX
+    $('#signupForm').submit(function(e) {
+      e.preventDefault();
+      $('#signupMessage').css('color', '#667eea').text('Processing...');
+      $.post('signup.php', $(this).serialize(), function(data) {
+        if (data.success) {
+          $('#signupMessage').css('color', 'green').text('Signup successful! You can now log in.');
+          setTimeout(() => {
+            $('#loginTab').click();
+            $('#signupMessage').text('');
+          }, 1500);
+        } else {
+          $('#signupMessage').css('color', '#e74c3c').text(data.message || 'Signup failed.');
+        }
+      }, 'json').fail(function() {
+        $('#signupMessage').css('color', '#e74c3c').text('Server error. Please try again.');
+      });
+    });
+
+    // Login AJAX
+    $('#loginForm').submit(function(e) {
+      e.preventDefault();
+      $('#loginMessage').css('color', '#667eea').text('Authenticating...');
+      $.post('login.php', $(this).serialize(), function(data) {
+        if (data.success) {
+          $('#loginMessage').css('color', 'green').text('Login successful! Redirecting...');
+          setTimeout(() => window.location = 'dashboard.php', 1200);
+        } else {
+          $('#loginMessage').css('color', '#e74c3c').text(data.message || 'Login failed.');
+        }
+      }, 'json').fail(function() {
+        $('#loginMessage').css('color', '#e74c3c').text('Server error. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
